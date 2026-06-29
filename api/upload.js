@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+// import fetch from "node-fetch";
 
 export default async function handler(req, res) {
   // ==== CORS 设置，允许前端跨域调用 ====
