@@ -1,140 +1,98 @@
 /* ============================================
-   Survey Logic — localStorage + GitHub upload
+   Client-side Upload Helper
+   Collects localStorage data and uploads to
+   GitHub via the Vercel API.
    ============================================ */
 
-const SURVEY_KEY = 'mcp_survey_responses';
+// Config — update this to your deployed API URL
+const API_URL = 'https://mcp-dataflow.vercel.app/api/upload';
 
-function getSurveyData() {
-  try { const raw = localStorage.getItem(SURVEY_KEY); return raw ? JSON.parse(raw) : null; } catch { return null; }
-}
-
-function saveSurveyData(data) {
-  localStorage.setItem(SURVEY_KEY, JSON.stringify(data, null, 2));
-}
-
-function trackSurveyEvent(type, detail = {}) {
-  const data = getSurveyData();
-  if (!data) return;
-  if (!data.events) data.events = [];
-  data.events.push({ type, timestamp: new Date().toISOString(), detail });
-  saveSurveyData(data);
-}
-
-function initSurveyData() {
-  let data = getSurveyData();
-  if (!data) {
-    data = { sessionId: `survey_${Date.now()}`, startedAt: new Date().toISOString(), completedAt: null, submitted: false, responses: {}, events: [] };
-    saveSurveyData(data);
+/**
+ * Initialize or get session start time.
+ */
+function getSessionDuration() {
+  const key = 'mcp_session_start';
+  let startTime = localStorage.getItem(key);
+  if (!startTime) {
+    startTime = Date.now().toString();
+    localStorage.setItem(key, startTime);
   }
+  return {
+    sessionStart: new Date(parseInt(startTime)).toISOString(),
+    sessionDurationMs: Date.now() - parseInt(startTime),
+    sessionDurationMin: Math.round((Date.now() - parseInt(startTime)) / 60000),
+  };
+}
+
+/**
+ * Collect all relevant localStorage data into a single object.
+ */
+function collectAllData() {
+  const data = {
+    exportedAt: new Date().toISOString(),
+    userAgent: navigator.userAgent,
+    session: getSessionDuration(),
+    tracking: null,
+    miniSurveys: null,
+    surveyResponses: null,
+    scenarioOrder: null,
+  };
+
+  try {
+    const raw = localStorage.getItem('claude_mcp_tracking');
+    data.tracking = raw ? JSON.parse(raw) : null;
+  } catch (e) {}
+
+  try {
+    const raw = localStorage.getItem('mcp_mini_surveys');
+    data.miniSurveys = raw ? JSON.parse(raw) : null;
+  } catch (e) {}
+
+  try {
+    const raw = localStorage.getItem('mcp_survey_responses');
+    data.surveyResponses = raw ? JSON.parse(raw) : null;
+  } catch (e) {}
+
+  try {
+    const raw = localStorage.getItem('claude_mcp_scenario_order');
+    data.scenarioOrder = raw ? JSON.parse(raw) : null;
+  } catch (e) {}
+
   return data;
 }
 
-function restoreAnswers() {
-  const data = getSurveyData();
-  if (!data || !data.responses) return;
-  Object.entries(data.responses).forEach(([name, value]) => {
-    if (Array.isArray(value)) {
-      value.forEach(v => { const el = document.querySelector(`input[name="${name}"][value="${v}"]`); if (el) el.checked = true; });
-    } else {
-      const el = document.querySelector(`input[name="${name}"][value="${value}"]`); if (el) el.checked = true;
-    }
+/**
+ * Generate a unique filename.
+ */
+function generateFileName() {
+  const now = new Date();
+  const ts = now.toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const random = Math.random().toString(36).slice(2, 6);
+  return `survey_${ts}_${random}.json`;
+}
+
+/**
+ * Upload JSON data to GitHub via the API endpoint.
+ * @param {Object} data - The data to upload
+ * @returns {Promise<Object>} - API response
+ */
+async function uploadToGitHub(data) {
+  const fileName = generateFileName();
+  const jsonStr = JSON.stringify(data, null, 2);
+  const content = btoa(unescape(encodeURIComponent(jsonStr))); // base64 encode
+
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fileName, content }),
   });
-}
 
-function collectAnswers() {
-  const responses = {};
-  const form = document.getElementById('surveyForm');
-  // Q1: multi-select
-  responses.q1 = Array.from(form.querySelectorAll('input[name="q1"]:checked')).map(el => el.value);
-  // Q2-Q21, Q25-Q29: single-select
-  for (const name of ['q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17','q18','q19','q20','q21','q25','q26','q27','q28','q29']) {
-    const el = form.querySelector(`input[name="${name}"]:checked`);
-    responses[name] = el ? el.value : null;
+  if (!response.ok) {
+    const errText = await response.text();
+    throw new Error(`Upload failed: ${response.status} ${errText}`);
   }
-  // Q22-Q24: target (A/B/C/D) + agreement (1-5)
-  for (const name of ['q22_target','q22_agree','q23_target','q23_agree','q24_target','q24_agree']) {
-    const el = form.querySelector(`input[name="${name}"]:checked`);
-    responses[name] = el ? el.value : null;
-  }
-  return responses;
+
+  const result = await response.json();
+  result.fileName = fileName; // Return fileName for display
+  return result;
 }
-
-function validateAll() {
-  const r = collectAnswers();
-  const unanswered = [];
-  if (!r.q1 || r.q1.length === 0) unanswered.push('Q1');
-  for (let i = 2; i <= 21; i++) { if (!r[`q${i}`]) unanswered.push(`Q${i}`); }
-  for (const name of ['q22_target','q22_agree','q23_target','q23_agree','q24_target','q24_agree']) { if (!r[name]) unanswered.push(name.replace('_',' ').toUpperCase()); }
-  for (let i = 25; i <= 29; i++) { if (!r[`q${i}`]) unanswered.push(`Q${i}`); }
-  return unanswered;
-}
-
-function setupAutoSave() {
-  document.getElementById('surveyForm').addEventListener('change', (e) => {
-    const data = getSurveyData(); if (data) { data.responses = collectAnswers(); saveSurveyData(data); }
-    trackSurveyEvent('answer_change', { question: e.target.name, value: e.target.value });
-  });
-}
-
-async function handleSubmit(e) {
-  e.preventDefault();
-  const unanswered = validateAll();
-  const warning = document.getElementById('submitWarning');
-  if (unanswered.length > 0) {
-    warning.style.display = 'block';
-    warning.textContent = `⚠ Please answer all questions. Unanswered: ${unanswered.join(', ')}`;
-    return;
-  }
-  warning.style.display = 'none';
-
-  const responses = collectAnswers();
-  const data = getSurveyData();
-  if (data) { data.responses = responses; data.submitted = true; data.completedAt = new Date().toISOString(); saveSurveyData(data); }
-  trackSurveyEvent('survey_submit', { totalAnswered: Object.keys(responses).length });
-
-  const formEl = document.getElementById('surveyForm');
-  formEl.innerHTML = `<div class="success-message"><h2>⏳ Submitting...</h2><p>Uploading your data. Please wait a moment.</p></div>`;
-
-  try {
-    const allData = collectAllData();
-    const result = await uploadToGitHub(allData);
-    const fileName = result.fileName || 'unknown';
-    formEl.innerHTML = `
-      <div class="success-message">
-        <h2>✅ Survey Submitted</h2>
-        <p>Thank you for your responses. Your data has been uploaded successfully.</p>
-        <div class="copy-code-box" style="margin:16px auto;padding:12px 16px;background:var(--bg-badge);border:1px solid var(--border-light);border-radius:var(--radius-md);max-width:420px;text-align:left;">
-          <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Your submission code:</p>
-          <code id="submissionCode" style="font-size:13px;font-weight:600;color:var(--text-primary);word-break:break-all;">${fileName}</code>
-          <button onclick="navigator.clipboard.writeText(document.getElementById('submissionCode').textContent);this.textContent='Copied!'" style="display:block;margin-top:8px;padding:4px 12px;font-size:12px;border-radius:var(--radius-full);border:1px solid var(--border-medium);background:var(--bg-card);cursor:pointer;">📋 Copy code</button>
-        </div>
-        <p style="font-size:12px;color:var(--text-secondary);">Please paste this code into the corresponding survey. Compensation will be provided after verification.</p>
-      </div>`;
-  } catch (uploadErr) {
-    console.error('Upload failed:', uploadErr);
-    formEl.innerHTML = `<div class="success-message"><h2>✅ Survey Submitted</h2><p>Thank you for your responses. (Data saved locally.)</p></div>`;
-  }
-}
-
-function setupPageTracking() {
-  let enterTime = Date.now();
-  trackSurveyEvent('survey_enter', { submitted: getSurveyData()?.submitted || false });
-  window.addEventListener('beforeunload', () => { trackSurveyEvent('survey_leave', { timeOnPageMs: Date.now() - enterTime }); });
-  let hiddenTime = null;
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) { hiddenTime = Date.now(); trackSurveyEvent('survey_hidden', {}); }
-    else { trackSurveyEvent('survey_visible', { hiddenDurationMs: hiddenTime ? Date.now() - hiddenTime : 0 }); }
-  });
-}
-
-function init() {
-  const data = initSurveyData();
-  if (data.submitted) { document.getElementById('surveyForm').innerHTML = `<div class="success-message"><h2>✅ Survey Already Submitted</h2><p>Thank you for your responses.</p></div>`; return; }
-  restoreAnswers();
-  setupAutoSave();
-  setupPageTracking();
-  document.getElementById('surveyForm').addEventListener('submit', handleSubmit);
-  console.log('📋 Survey ready — 29 questions');
-}
-
-document.addEventListener('DOMContentLoaded', init);
