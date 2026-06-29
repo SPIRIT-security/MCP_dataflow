@@ -5,7 +5,7 @@
    ============================================ */
 
 // Config — update this to your deployed API URL
-const API_URL = 'https://mcp-dataflow.vercel.app/api/upload';
+var API_URL = 'https://mcp-dataflow.vercel.app/api/upload';
 
 /**
  * Initialize or get session start time.
