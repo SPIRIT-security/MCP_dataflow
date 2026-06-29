@@ -94,26 +94,32 @@ async function handleSubmit(e) {
   const formEl = document.getElementById('surveyForm');
   formEl.innerHTML = `<div class="success-message"><h2>⏳ Submitting...</h2><p>Uploading your data. Please wait a moment.</p></div>`;
 
+  // Generate code before upload so it's saved even if upload fails
+  const fileName = generateFileName();
+  if (data) { data.uploadCode = fileName; saveSurveyData(data); }
+
   try {
     const allData = collectAllData();
-    const result = await uploadToGitHub(allData);
-    const fileName = result.fileName || 'unknown';
-    if (data) { data.uploadCode = fileName; saveSurveyData(data); }
+    await uploadToGitHub(allData, fileName);
     formEl.innerHTML = `
       <div class="success-message">
         <h2>✅ Survey Submitted</h2>
         <p>Thank you for your responses. Your data has been uploaded successfully.</p>
-        <div class="copy-code-box" style="margin:16px auto;padding:12px 16px;background:var(--bg-badge);border:1px solid var(--border-light);border-radius:var(--radius-md);max-width:420px;text-align:left;">
-          <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Your submission code:</p>
-          <code id="submissionCode" style="font-size:13px;font-weight:600;color:var(--text-primary);word-break:break-all;">${fileName}</code>
-          <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('submissionCode').textContent);this.textContent='Copied!'" style="display:block;margin-top:8px;padding:4px 12px;font-size:12px;border-radius:var(--radius-full);border:1px solid var(--border-medium);background:var(--bg-card);cursor:pointer;">📋 Copy code</button>
-        </div>
-        <p style="font-size:12px;color:var(--text-secondary);">Please paste this code into the corresponding survey. Compensation will be provided after verification.</p>
+        ${showCodeBox(fileName)}
       </div>`;
   } catch (uploadErr) {
     console.error('Upload failed:', uploadErr);
-    formEl.innerHTML = `<div class="success-message"><h2>✅ Survey Submitted</h2><p>Thank you for your responses. (Data saved locally.)</p></div>`;
+    formEl.innerHTML = `<div class="success-message"><h2>✅ Survey Submitted</h2><p>Thank you for your responses. (Data saved locally.)</p>${showCodeBox(fileName)}</div>`;
   }
+}
+
+function showCodeBox(code) {
+  return `<div class="copy-code-box" style="margin:16px auto;padding:12px 16px;background:var(--bg-badge);border:1px solid var(--border-light);border-radius:var(--radius-md);max-width:420px;text-align:left;">
+    <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Your submission code:</p>
+    <code id="submissionCode" style="font-size:13px;font-weight:600;color:var(--text-primary);word-break:break-all;">${code}</code>
+    <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('submissionCode').textContent);this.textContent='Copied!'" style="display:block;margin-top:8px;padding:4px 12px;font-size:12px;border-radius:var(--radius-full);border:1px solid var(--border-medium);background:var(--bg-card);cursor:pointer;">📋 Copy code</button>
+  </div>
+  <p style="font-size:12px;color:var(--text-secondary);">Please paste this code into the corresponding survey. Compensation will be provided after verification.</p>`;
 }
 
 function setupPageTracking() {
@@ -134,12 +140,7 @@ function init() {
     document.getElementById('surveyForm').innerHTML = `<div class="success-message">
       <h2>✅ Survey Already Submitted</h2>
       <p>Thank you for your responses.</p>
-      <div class="copy-code-box" style="margin:16px auto;padding:12px 16px;background:var(--bg-badge);border:1px solid var(--border-light);border-radius:var(--radius-md);max-width:420px;text-align:left;">
-        <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Your submission code:</p>
-        <code id="submissionCode" style="font-size:13px;font-weight:600;color:var(--text-primary);word-break:break-all;">${code}</code>
-        <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('submissionCode').textContent);this.textContent='Copied!'" style="display:block;margin-top:8px;padding:4px 12px;font-size:12px;border-radius:var(--radius-full);border:1px solid var(--border-medium);background:var(--bg-card);cursor:pointer;">📋 Copy code</button>
-      </div>
-      <p style="font-size:12px;color:var(--text-secondary);">Please paste this code into the corresponding survey. Compensation will be provided after verification.</p>
+      ${showCodeBox(code)}
     </div>`;
     return;
   }
