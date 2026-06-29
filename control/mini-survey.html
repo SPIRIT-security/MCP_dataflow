@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Survey</title>
+  <link rel="stylesheet" href="css/mini-survey.css">
+</head>
+<body>
+  <div class="ms-page">
+    <div class="ms-card">
+      <h1 class="ms-title">Quick Feedback</h1>
+      <p class="ms-subtitle" id="msSubtitle">Please answer a few questions about the task you just completed.</p>
+
+      <form id="msForm">
+        <!-- Q1 -->
+        <div class="ms-question">
+          <div class="ms-q-num">Q1</div>
+          <div class="ms-q-text">What data do you think the Claude application can access? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options" id="q1Options">
+            <label><input type="checkbox" name="q1" value="current-conv"> My current conversation</label>
+            <label><input type="checkbox" name="q1" value="previous-conv"> My previous conversations</label>
+            <label><input type="checkbox" name="q1" value="mcp-data"> Data returned by the MCP server</label>
+            <label><input type="checkbox" name="q1" value="device-files"> Files on my device</label>
+            <label><input type="checkbox" name="q1" value="third-party-info"> Information from connected third-party services</label>
+            <label><input type="checkbox" name="q1" value="not-sure"> I am not sure</label>
+          </div>
+        </div>
+
+        <!-- Q2 (task-specific MCP name) -->
+        <div class="ms-question">
+          <div class="ms-q-num">Q2</div>
+          <div class="ms-q-text" id="q2Text">What data do you think the MCP server can access? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options" id="q2Options">
+            <label><input type="checkbox" name="q2" value="prompt"> My prompt/request</label>
+            <label><input type="checkbox" name="q2" value="ai-response"> The AI's response</label>
+            <label><input type="checkbox" name="q2" value="personal-info"> My personal information</label>
+            <label><input type="checkbox" name="q2" value="third-party-data"> Data from connected third-party services</label>
+            <label><input type="checkbox" name="q2" value="files"> Files on my device</label>
+            <label><input type="checkbox" name="q2" value="not-sure"> I am not sure</label>
+          </div>
+        </div>
+
+        <!-- Likert scale -->
+        <div class="ms-likert-section">
+          <p class="ms-likert-hint">(1 = Strongly, 5 = Not at all)</p>
+
+          <!-- Q3 -->
+          <div class="ms-question">
+            <div class="ms-q-num">Q3</div>
+            <div class="ms-q-text">How useful do you find the information provided during the chat?</div>
+            <div class="ms-likert" data-q="q3">
+              <label><input type="radio" name="q3" value="1"><span>1</span><small>Useless</small></label>
+              <label><input type="radio" name="q3" value="2"><span>2</span></label>
+              <label><input type="radio" name="q3" value="3"><span>3</span></label>
+              <label><input type="radio" name="q3" value="4"><span>4</span></label>
+              <label><input type="radio" name="q3" value="5"><span>5</span><small>Useful</small></label>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="ms-question">
+            <div class="ms-q-num">Q4</div>
+            <div class="ms-q-text">How concerned are you with the data flow during the chat?</div>
+            <div class="ms-likert" data-q="q4">
+              <label><input type="radio" name="q4" value="1"><span>1</span><small>Worried</small></label>
+              <label><input type="radio" name="q4" value="2"><span>2</span></label>
+              <label><input type="radio" name="q4" value="3"><span>3</span></label>
+              <label><input type="radio" name="q4" value="4"><span>4</span></label>
+              <label><input type="radio" name="q4" value="5"><span>5</span><small>Unworried</small></label>
+            </div>
+          </div>
+        </div>
+
+        <p class="ms-warning" id="msWarning" style="display:none;">⚠ Please answer all questions before continuing.</p>
+        <button type="submit" class="ms-submit-btn">Submit &amp; Return to Homepage</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/mini-survey.js"></script>
+</body>
+</html>

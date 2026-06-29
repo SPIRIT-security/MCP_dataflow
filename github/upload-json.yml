@@ -1,0 +1,71 @@
+name: Upload JSON to GitHub
+
+on:
+  workflow_dispatch: # 手动触发，也可以改成 push、schedule 等
+
+jobs:
+  upload-json:
+    runs-on: ubuntu-latest
+
+    env:
+      OWNER: SPIRIT-security
+      REPO: mcp_dataset
+      BRANCH: main
+      FOLDER: data
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Upload JSON to GitHub
+        env:
+          GITHUB_TOKEN: ${{ vars.GITHUBTOKEN }} # 这里读取 Repository variable
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const fetch = require('node-fetch');
+
+          function generate_JSONBlob() {
+            const data = { timestamp: Date.now() };
+            const fileName = 'example.json';
+            return { blob: Buffer.from(JSON.stringify(data, null, 2)), fileName };
+          }
+
+          (async () => {
+            const jsonData = generate_JSONBlob();
+            const content = jsonData.blob.toString('base64');
+            const filePath = '${FOLDER}/' + jsonData.fileName;
+
+            // 检查文件是否存在
+            let sha = null;
+            try {
+              const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${filePath}?ref=${BRANCH}`, {
+                headers: { Authorization: 'token ' + process.env.GITHUB_TOKEN }
+              });
+              if (res.ok) {
+                const file = await res.json();
+                sha = file.sha;
+              }
+            } catch (e) {}
+
+            // 上传或更新
+            const uploadRes = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${filePath}`, {
+              method: 'PUT',
+              headers: { 'Authorization': 'token ' + process.env.GITHUB_TOKEN, 'Accept': 'application/vnd.github+json' },
+              body: JSON.stringify({
+                message: 'Upload JSON file ' + jsonData.fileName,
+                content: content,
+                branch: '${BRANCH}',
+                sha: sha
+              })
+            });
+            const result = await uploadRes.json();
+            console.log('Upload result:', result.content.html_url);
+          })();
+          "
