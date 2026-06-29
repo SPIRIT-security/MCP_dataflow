@@ -76,8 +76,8 @@ function generateFileName() {
  * @param {Object} data - The data to upload
  * @returns {Promise<Object>} - API response
  */
-async function uploadToGitHub(data) {
-  const fileName = generateFileName();
+async function uploadToGitHub(data, customFileName) {
+  const fileName = customFileName || generateFileName();
   const jsonStr = JSON.stringify(data, null, 2);
   const content = btoa(unescape(encodeURIComponent(jsonStr))); // base64 encode
 
