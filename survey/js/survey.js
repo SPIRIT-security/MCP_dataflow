@@ -98,6 +98,7 @@ async function handleSubmit(e) {
     const allData = collectAllData();
     const result = await uploadToGitHub(allData);
     const fileName = result.fileName || 'unknown';
+    if (data) { data.uploadCode = fileName; saveSurveyData(data); }
     formEl.innerHTML = `
       <div class="success-message">
         <h2>✅ Survey Submitted</h2>
@@ -128,7 +129,20 @@ function setupPageTracking() {
 
 function init() {
   const data = initSurveyData();
-  if (data.submitted) { document.getElementById('surveyForm').innerHTML = `<div class="success-message"><h2>✅ Survey Already Submitted</h2><p>Thank you for your responses.</p></div>`; return; }
+  if (data.submitted) {
+    const code = data.uploadCode || 'unknown';
+    document.getElementById('surveyForm').innerHTML = `<div class="success-message">
+      <h2>✅ Survey Already Submitted</h2>
+      <p>Thank you for your responses.</p>
+      <div class="copy-code-box" style="margin:16px auto;padding:12px 16px;background:var(--bg-badge);border:1px solid var(--border-light);border-radius:var(--radius-md);max-width:420px;text-align:left;">
+        <p style="font-size:11px;color:var(--text-tertiary);margin-bottom:4px;">Your submission code:</p>
+        <code id="submissionCode" style="font-size:13px;font-weight:600;color:var(--text-primary);word-break:break-all;">${code}</code>
+        <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('submissionCode').textContent);this.textContent='Copied!'" style="display:block;margin-top:8px;padding:4px 12px;font-size:12px;border-radius:var(--radius-full);border:1px solid var(--border-medium);background:var(--bg-card);cursor:pointer;">📋 Copy code</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-secondary);">Please paste this code into the corresponding survey. Compensation will be provided after verification.</p>
+    </div>`;
+    return;
+  }
   restoreAnswers();
   setupAutoSave();
   setupPageTracking();
