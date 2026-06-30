@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="app" id="app">
-    <!-- ===== Sidebar (same as index) ===== -->
+    
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
@@ -61,9 +61,9 @@
       </div>
     </aside>
 
-    <!-- ===== Main Content ===== -->
+    
     <main class="main">
-      <!-- Top bar -->
+      
       <div class="top-bar" id="topBar">
         <button class="mobile-sidebar-toggle" id="mobileSidebarToggle" aria-label="Open sidebar">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -91,10 +91,10 @@
         </div>
       </div>
 
-      <!-- Chat messages area -->
+      
       <div class="chat-messages" id="chatMessages">
         <div class="response-container" id="responseContainer">
-          <!-- Scenario info banner -->
+          
           <div class="scenario-banner" id="scenarioBanner" style="display:none;">
             <div class="scenario-banner-left">
               <span class="scenario-badge" id="scenarioBadge">Prompt A</span>
@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <!-- User message bubble -->
+          
           <div class="message-row user-row">
             <div class="message-avatar user-avatar-msg">U</div>
             <div class="message-bubble user-bubble" id="userBubble">
@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <!-- Claude response area -->
+          
           <div class="message-row claude-row">
             <div class="message-avatar claude-avatar-msg">
               <svg width="20" height="20" viewBox="0 0 100 100" fill="none">
@@ -130,7 +130,7 @@
               </svg>
             </div>
             <div class="message-content" id="claudeMessageContent">
-              <!-- Thinking section -->
+              
               <div class="thinking-section" id="thinkingSection">
                 <div class="thinking-header" id="thinkingHeader">
                   <div class="thinking-header-left">
@@ -943,19 +943,19 @@ AAAAAElFTkSuQmCC"/>
                   <a class="svg-overlay-link" style="position:absolute;top:90%;left:19%;width:14%;height:3%;cursor:pointer;" onclick="showMCPAnthFileSummaryModal()" title="Files summary"></a>
                 </div>
               </div>
-              <!-- Tool calls container -->
+              
               <div class="blocks-container" id="blocksContainer">
-                <!-- Dynamically filled by JS -->
+                
               </div>
 
               <!-- Post-tool content (hidden until user clicks Allow) -->
               <div class="post-tool-content" id="postToolContent">
-                <!-- Final response -->
+                
                 <div class="final-response" id="finalResponse">
                   <div class="final-response-text" id="finalResponseText"></div>
                 </div>
 
-                <!-- Response footer -->
+                
                 <div class="response-footer">
                   <div class="response-actions">
                     <button class="response-action-btn" id="copyResponseBtn" aria-label="Copy response">
@@ -984,7 +984,7 @@ AAAAAElFTkSuQmCC"/>
                 </div>
               </div>
 
-              <!-- Continue to survey button (shown after completion or denial) -->
+              
               <div class="survey-nav-area" id="surveyNavArea" style="display:none;">
                 <a href="" class="survey-nav-btn" id="surveyNavBtn">
                   Continue to Survey
@@ -992,7 +992,7 @@ AAAAAElFTkSuQmCC"/>
                 </a>
               </div>
 
-              <!-- Denied message (shown when user clicks Deny) -->
+              
               <div class="denied-message" id="deniedMessage">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"/>
@@ -1006,7 +1006,7 @@ AAAAAElFTkSuQmCC"/>
         </div>
       </div>
 
-      <!-- Input area -->
+      
       <div class="input-area" id="inputArea">
         <div class="input-container">
           <div class="input-return-hint">
@@ -1014,51 +1014,160 @@ AAAAAElFTkSuQmCC"/>
           </div>
         </div>
       </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
 
-      <div class="email-detail-modal-overlay" id="mCPAnthEmailModalOverlay" onclick="hideMCPAnthEmailModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthEmailModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthEmailModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="email-detail-modal-overlay" id="emailDetailModalOverlay" onclick="hideEmailDetailModal()"></div>
+      <div class="email-detail-modal" id="emailDetailModal">
+        <button class="dataflow-modal-close" onclick="hideEmailDetailModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Attendee email, time window and meeting duration</h3><p style="font-family:monospace;font-size:14px;">Primary and attendeeA@example.com<br>Jan 1, 10:00 AM to Jan 2, 6:00 PM<br>60-minute meeting<br>Max 3 free time slots</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="timeSlotsModalOverlay" onclick="hideTimeSlotsModal()"></div>
+      <div class="email-detail-modal" id="timeSlotsModal">
+        <button class="dataflow-modal-close" onclick="hideTimeSlotsModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Available time slots and duration</h3><p style="font-family:monospace;font-size:14px;">Jan 1, 10:00 AM to 12:00 AM, duration 120 minutes<br>Jan 1, 1:00 PM to 2:00 PM, duration 60 minutes<br>Jan 2, 11:00 AM to 2:00 PM, duration 180 minutes</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="eventTitleModalOverlay" onclick="hideEventTitleModal()"></div>
+      <div class="email-detail-modal" id="eventTitleModal">
+        <button class="dataflow-modal-close" onclick="hideEventTitleModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Event title, description, attendee list and meeting time</h3><p style="font-family:monospace;font-size:14px;">Project meeting<br>Discussing Project Division of Labor and Plan<br>attendeeA@example.com<br>Jan 1, 10:00 AM to 11:00 AM</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="eventCreationModalOverlay" onclick="hideEventCreationModal()"></div>
+      <div class="email-detail-modal" id="eventCreationModal">
+        <button class="dataflow-modal-close" onclick="hideEventCreationModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Event creation</h3><p style="font-family:monospace;font-size:14px;">Project meeting<br>Discussing Project Division of Labor and Plan<br>Creator user@example.com<br>Creat time Jan 1, 8:00:00 AM<br>Update time Jan 1. 08:00:00 AM<br>attendeeA@example.com<br>Jan 1, 10:00 AM to 11:00 AM</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="successNotifModalOverlay" onclick="hideSuccessNotifModal()"></div>
+      <div class="email-detail-modal" id="successNotifModal">
+        <button class="dataflow-modal-close" onclick="hideSuccessNotifModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Successful notification</h3><p style="font-family:monospace;font-size:14px;">Done! Here's a summary of what happened:<br>Event created<br>Title: Project meeting<br>Date: Monday, Jan 1<br>Time: 10:00-11:00 AM EST<br>Attendee: attendeeA@example.com</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="emailDetailModal3Overlay" onclick="hideEmailDetailModal3()"></div>
+      <div class="email-detail-modal" id="emailDetailModal3">
+        <button class="dataflow-modal-close" onclick="hideEmailDetailModal3()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Email and time window</h3><p style="font-family:monospace;font-size:14px;">user@example.com<br>Jan 1, 10:00 AM to Jan 2, 6:00 PM</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthCalendarListModalOverlay" onclick="hideMCPAnthCalendarListModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthCalendarListModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthCalendarListModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Calendar event list</h3><p style="font-family:monospace;font-size:14px;">Event-1 titled "Team Sync Meeting-1" may be scheduled from Jan 1, 10:00 AM to 11:00 AM, with Attender A (accepted) and Attender B (pending) included as participants.<br>Event-2 titled "Team Sync Meeting-2" may be scheduled from Jan 2, 11:00 AM to 12:00 AM, with Attender A (pending) and Attender B (pending) included as participants</p></div>
+      <div class="email-detail-modal-overlay" id="calendarListModalOverlay" onclick="hideCalendarListModal()"></div>
+      <div class="email-detail-modal" id="calendarListModal">
+        <button class="dataflow-modal-close" onclick="hideCalendarListModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Calendar event list</h3><p style="font-family:monospace;font-size:14px;">Event-1 titled "Team Sync Meeting-1" (ID: 12345678), may be scheduled from Jan 1, 10:00 AM to 11:00 AM<br>Event-2 titled "Team Sync Meeting-1" (ID: 12345679), may be scheduled from Jan 2, 11:00 AM to 12:00 AM</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthDirPathModalOverlay" onclick="hideMCPAnthDirPathModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthDirPathModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
+      <div class="email-detail-modal-overlay" id="eventCreatorModalOverlay" onclick="hideEventCreatorModal()"></div>
+      <div class="email-detail-modal" id="eventCreatorModal">
+        <button class="dataflow-modal-close" onclick="hideEventCreatorModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Event creator, title, description, attendee list and meeting time</h3><p style="font-family:monospace;font-size:14px;">Creator user@example.com<br>Project meeting<br>Discussing Project Division of Labor and Plan<br>attendeeA@example.com<br>Jan 1, 1:00 PM to 2:00 PM</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthDirSearchModalOverlay" onclick="hideMCPAnthDirSearchModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthDirSearchModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthDirSearchModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="email-detail-modal-overlay" id="eventCreationModal3Overlay" onclick="hideEventCreationModal3()"></div>
+      <div class="email-detail-modal" id="eventCreationModal3">
+        <button class="dataflow-modal-close" onclick="hideEventCreationModal3()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Event creation</h3><p style="font-family:monospace;font-size:14px;">Event created: Project meeting (12345678)</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="successNotifModal3Overlay" onclick="hideSuccessNotifModal3()"></div>
+      <div class="email-detail-modal" id="successNotifModal3">
+        <button class="dataflow-modal-close" onclick="hideSuccessNotifModal3()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Successful notification</h3><p style="font-family:monospace;font-size:14px;">Done! Here's a summary of what happened:<br>Event created<br>Title: Project meeting<br>Date: Monday, Jan 1<br>Time: 1:00-2:00 PM EST<br>Attendee: attendeeA@example.com</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemDirPathModalOverlay" onclick="hideFilesystemDirPathModal()"></div>
+      <div class="email-detail-modal" id="filesystemDirPathModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directories path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemDirSearchModalOverlay" onclick="hideFilesystemDirSearchModal()"></div>
+      <div class="email-detail-modal" id="filesystemDirSearchModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemDirSearchModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Directory path and search pattern</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Search file names by keyword such as "File"</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthSearchResultModalOverlay" onclick="hideMCPAnthSearchResultModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthSearchResultModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthSearchResultModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="email-detail-modal-overlay" id="filesystemSearchResultModalOverlay" onclick="hideFilesystemSearchResultModal()"></div>
+      <div class="email-detail-modal" id="filesystemSearchResultModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemSearchResultModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Search result</h3><p style="font-family:monospace;font-size:14px;">File paths matching the keyword:<br>/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthFilePathModalOverlay" onclick="hideMCPAnthFilePathModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthFilePathModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="email-detail-modal-overlay" id="filesystemFilePathModalOverlay" onclick="hideFilesystemFilePathModal()"></div>
+      <div class="email-detail-modal" id="filesystemFilePathModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Files path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthFileMetadataModalOverlay" onclick="hideMCPAnthFileMetadataModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthFileMetadataModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthFileMetadataModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of File metadata includes creation time, update time</h3><p style="font-family:monospace;font-size:14px;">Created time is Mon Jan 1 2026 10:00:00 GMT-0400 (EST)<br>Modified time is Tue Jan 2 2026 16:00:08 GMT-0400 (EST)<br>Accessed time is Fri Jan 5 2026 11:00:00 GMT-0400 (EST)<br>It is not a directory</p></div>
+      <div class="email-detail-modal-overlay" id="filesystemFileMetadataModalOverlay" onclick="hideFilesystemFileMetadataModal()"></div>
+      <div class="email-detail-modal" id="filesystemFileMetadataModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemFileMetadataModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of File metadata</h3><p style="font-family:monospace;font-size:14px;">Created time is Mon Jan 1 2026 10:00:00 GMT-0400 (EST)<br>Modified time is Tue Jan 2 2026 16:00:08 GMT-0400 (EST)<br>Accessed time is Fri Jan 5 2026 11:00:00 GMT-0400 (EST)<br>It is not a directory</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthFileContentModalOverlay" onclick="hideMCPAnthFileContentModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthFileContentModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <div class="email-detail-modal-overlay" id="filesystemFileContentModalOverlay" onclick="hideFilesystemFileContentModal()"></div>
+      <div class="email-detail-modal" id="filesystemFileContentModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Files content</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt: Contents of the File-1.txt</p></div>
       </div>
-      <div class="email-detail-modal-overlay" id="mCPAnthFileSummaryModalOverlay" onclick="hideMCPAnthFileSummaryModal()"></div>
-      <div class="email-detail-modal" id="mCPAnthFileSummaryModal">
-        <button class="dataflow-modal-close" onclick="hideMCPAnthFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">According to your calendar event titles, dates, and descriptions, I found that only the content in file-1.txt fulfills your requirements. Here is the summary:</p></div>
+      <div class="email-detail-modal-overlay" id="filesystemFileSummaryModalOverlay" onclick="hideFilesystemFileSummaryModal()"></div>
+      <div class="email-detail-modal" id="filesystemFileSummaryModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">Here's what I found:<br>Only File-1.txt is related and was modified on Jan 2.</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemThirdDirPathModalOverlay" onclick="hideFilesystemThirdDirPathModal()"></div>
+      <div class="email-detail-modal" id="filesystemThirdDirPathModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemThirdDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemThirdDirTreeModalOverlay" onclick="hideFilesystemThirdDirTreeModal()"></div>
+      <div class="email-detail-modal" id="filesystemThirdDirTreeModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemThirdDirTreeModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directories tree</h3><p style="font-family:monospace;font-size:14px;">📁 Example<br>├── 📁 Folder-1<br>│   ├── 📄 File-4.docx<br>│   ├── 📄 File-5.docx<br>│   └── 📄 File-6.docx<br>├── 📄 File-1.txt<br>├── 📄 File-2.txt<br>├── 📄 File-3.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemThirdFilePathModalOverlay" onclick="hideFilesystemThirdFilePathModal()"></div>
+      <div class="email-detail-modal" id="filesystemThirdFilePathModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemThirdFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemThirdFileContentModalOverlay" onclick="hideFilesystemThirdFileContentModal()"></div>
+      <div class="email-detail-modal" id="filesystemThirdFileContentModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemThirdFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files content</h3><p style="font-family:monospace;font-size:14px;">Contents of File-1.txt<br>Contents of File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="filesystemThirdFileSummaryModalOverlay" onclick="hideFilesystemThirdFileSummaryModal()"></div>
+      <div class="email-detail-modal" id="filesystemThirdFileSummaryModal">
+        <button class="dataflow-modal-close" onclick="hideFilesystemThirdFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files Summary</h3><p style="font-family:monospace;font-size:14px;">I have read three related files, and only File-1.txt fulfills your requirements.</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdEmailModalOverlay" onclick="hideMCPThirdEmailModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdEmailModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdEmailModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Email and time window</h3><p style="font-family:monospace;font-size:14px;">user@example.com<br>Jan 1, 10:00 AM to Jan 2, 6:00 PM</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdCalendarListModalOverlay" onclick="hideMCPThirdCalendarListModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdCalendarListModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdCalendarListModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Calendar event list</h3><p style="font-family:monospace;font-size:14px;">Event-1 titled "Team Sync Meeting-1" (ID: 12345678)<br>Event-2 titled "Team Sync Meeting-1" (ID: 12345679)</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdDirPathModalOverlay" onclick="hideMCPThirdDirPathModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdDirPathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdDirTreeModalOverlay" onclick="hideMCPThirdDirTreeModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdDirTreeModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdDirTreeModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directories tree</h3><p style="font-family:monospace;font-size:14px;">📁 Example<br>├── 📁 Folder-1<br>├── 📄 File-1.txt<br>├── 📄 File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFilePathModalOverlay" onclick="hideMCPThirdFilePathModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFilePathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFileContentModalOverlay" onclick="hideMCPThirdFileContentModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFileContentModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files content</h3><p style="font-family:monospace;font-size:14px;">Contents of File-1.txt<br>Contents of File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFileSummaryModalOverlay" onclick="hideMCPThirdFileSummaryModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFileSummaryModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">According to your calendar event titles and dates, only file-1.txt fulfills your requirements.</p></div>
       </div>
       <!-- Overlay for mobile sidebar -->
       <div class="overlay" id="overlay"></div>
