@@ -101,6 +101,7 @@ async function handleSubmit(e) {
   try {
     const allData = collectAllData();
     await uploadToGitHub(allData, fileName);
+    if (data) { data.uploadStatus = 1; saveSurveyData(data); }
     formEl.innerHTML = `
       <div class="success-message">
         <h2>✅ Survey Submitted</h2>
@@ -109,8 +110,29 @@ async function handleSubmit(e) {
       </div>`;
   } catch (uploadErr) {
     console.error('Upload failed:', uploadErr);
-    formEl.innerHTML = `<div class="success-message"><h2>✅ Survey Submitted</h2><p>Thank you for your responses. (Data saved locally.)</p>${showCodeBox(fileName)}</div>`;
+    if (data) { data.uploadStatus = 2; saveSurveyData(data); }
+    formEl.innerHTML = `<div class="success-message"><h2>⚠ Upload Failed</h2><p>Your responses are saved locally. You can retry later.</p>${showCodeBox(fileName)}${retryButton(fileName)}</div>`;
   }
+}
+
+async function retryUpload(fileName) {
+window.retryUpload = retryUpload;
+  const formEl = document.getElementById('surveyForm');
+  formEl.innerHTML = `<div class="success-message"><h2>⏳ Retrying...</h2><p>Uploading your data...</p></div>`;
+  const data = getSurveyData();
+  try {
+    const allData = collectAllData();
+    await uploadToGitHub(allData, fileName);
+    if (data) { data.uploadStatus = 1; saveSurveyData(data); }
+    formEl.innerHTML = `<div class="success-message"><h2>✅ Upload Successful</h2><p>Your data has been uploaded.</p>${showCodeBox(fileName)}</div>`;
+  } catch (e) {
+    console.error('Retry failed:', e);
+    formEl.innerHTML = `<div class="success-message"><h2>⚠ Upload Failed</h2><p>Still unable to upload. Please try again later.</p>${showCodeBox(fileName)}${retryButton(fileName)}</div>`;
+  }
+}
+
+function retryButton(fileName) {
+  return `<button type="button" onclick="retryUpload('${fileName}')" style="margin-top:12px;padding:8px 20px;border-radius:var(--radius-full);font-size:13px;font-weight:500;color:#fff;background:var(--accent);border:none;cursor:pointer;">🔄 Retry Upload</button>`;
 }
 
 function showCodeBox(code) {
@@ -137,10 +159,15 @@ function init() {
   const data = initSurveyData();
   if (data.submitted) {
     const code = data.uploadCode || 'unknown';
+    const status = data.uploadStatus || 0;
+    const statusText = status === 1 ? '✅ Survey Already Submitted' : '⚠ Survey Submitted (Upload Pending)';
+    const statusDesc = status === 1 ? 'Thank you for your responses.' : 'Your responses are saved. Upload has not completed yet.';
+    const retryHtml = status === 2 ? retryButton(code) : '';
     document.getElementById('surveyForm').innerHTML = `<div class="success-message">
-      <h2>✅ Survey Already Submitted</h2>
-      <p>Thank you for your responses.</p>
+      <h2>${statusText}</h2>
+      <p>${statusDesc}</p>
       ${showCodeBox(code)}
+      ${retryHtml}
     </div>`;
     return;
   }
