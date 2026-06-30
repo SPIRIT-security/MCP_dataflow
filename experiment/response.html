@@ -1169,6 +1169,87 @@ AAAAAElFTkSuQmCC"/>
         <button class="dataflow-modal-close" onclick="hideMCPThirdFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">According to your calendar event titles and dates, only file-1.txt fulfills your requirements.</p></div>
       </div>
+
+      <div class="email-detail-modal-overlay" id="mCPAnthEmailModalOverlay" onclick="hideMCPAnthEmailModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthEmailModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthEmailModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Email and time window</h3><p style="font-family:monospace;font-size:14px;">user@example.com<br>Jan 1, 10:00 AM to Jan 2, 6:00 PM</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthCalendarListModalOverlay" onclick="hideMCPAnthCalendarListModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthCalendarListModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthCalendarListModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Calendar event list</h3><p style="font-family:monospace;font-size:14px;">Event-1 titled "Team Sync Meeting-1" may be scheduled from Jan 1, 10:00 AM to 11:00 AM, with Attender A (accepted) and Attender B (pending) included as participants.<br>Event-2 titled "Team Sync Meeting-2" may be scheduled from Jan 2, 11:00 AM to 12:00 AM, with Attender A (pending) and Attender B (pending) included as participants</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthDirPathModalOverlay" onclick="hideMCPAnthDirPathModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthDirPathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthDirSearchModalOverlay" onclick="hideMCPAnthDirSearchModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthDirSearchModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthDirSearchModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directory path and search pattern</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Search file names by keyword such as "File"</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthSearchResultModalOverlay" onclick="hideMCPAnthSearchResultModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthSearchResultModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthSearchResultModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Search result</h3><p style="font-family:monospace;font-size:14px;">File paths matching the keyword:<br>/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthFilePathModalOverlay" onclick="hideMCPAnthFilePathModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthFilePathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthFileMetadataModalOverlay" onclick="hideMCPAnthFileMetadataModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthFileMetadataModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthFileMetadataModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of File metadata</h3><p style="font-family:monospace;font-size:14px;">Created time is Mon Jan 1 2026 10:00:00 GMT-0400 (EST)<br>Modified time is Tue Jan 2 2026 16:00:08 GMT-0400 (EST)<br>Accessed time is Fri Jan 5 2026 11:00:00 GMT-0400 (EST)<br>It is not a directory</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthFileContentModalOverlay" onclick="hideMCPAnthFileContentModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthFileContentModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files content</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt: Contents of the File-1.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPAnthFileSummaryModalOverlay" onclick="hideMCPAnthFileSummaryModal()"></div>
+      <div class="email-detail-modal" id="mCPAnthFileSummaryModal">
+        <button class="dataflow-modal-close" onclick="hideMCPAnthFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">According to your calendar event titles, dates, and descriptions, only file-1.txt fulfills your requirements.</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdEmailModalOverlay" onclick="hideMCPThirdEmailModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdEmailModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdEmailModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Email and time window</h3><p style="font-family:monospace;font-size:14px;">user@example.com<br>Jan 1, 10:00 AM to Jan 2, 6:00 PM</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdCalendarListModalOverlay" onclick="hideMCPThirdCalendarListModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdCalendarListModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdCalendarListModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Calendar event list</h3><p style="font-family:monospace;font-size:14px;">Event-1 titled "Team Sync Meeting-1" (ID: 12345678)<br>Event-2 titled "Team Sync Meeting-1" (ID: 12345679)</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdDirPathModalOverlay" onclick="hideMCPThirdDirPathModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdDirPathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdDirTreeModalOverlay" onclick="hideMCPThirdDirTreeModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdDirTreeModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdDirTreeModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Directories tree</h3><p style="font-family:monospace;font-size:14px;">📁 Example<br>├── 📁 Folder-1<br>├── 📄 File-1.txt<br>├── 📄 File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFilePathModalOverlay" onclick="hideMCPThirdFilePathModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFilePathModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFilePathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example/File-1.txt<br>/Users/Documents/Example/File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFileContentModalOverlay" onclick="hideMCPThirdFileContentModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFileContentModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFileContentModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files content</h3><p style="font-family:monospace;font-size:14px;">Contents of File-1.txt<br>Contents of File-2.txt</p></div>
+      </div>
+      <div class="email-detail-modal-overlay" id="mCPThirdFileSummaryModalOverlay" onclick="hideMCPThirdFileSummaryModal()"></div>
+      <div class="email-detail-modal" id="mCPThirdFileSummaryModal">
+        <button class="dataflow-modal-close" onclick="hideMCPThirdFileSummaryModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+        <div class="email-detail-body"><h3>Example of Files summary</h3><p style="font-family:monospace;font-size:14px;">According to your calendar event titles and dates, only file-1.txt fulfills your requirements.</p></div>
+      </div>
       <!-- Overlay for mobile sidebar -->
       <div class="overlay" id="overlay"></div>
     </main>
