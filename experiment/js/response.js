@@ -1736,7 +1736,7 @@ function renderPage() {
   // Render thinking
   renderThinking(content);
 
-  const notifScenarios = ['A-anthropic','A-third-party','B-anthropic','B-third-party','C-anthropic', 'C-third-party'];
+  const notifScenarios = ['A-anthropic','A-third-party','B-anthropic','B-third-party','C-anthropic','C-third-party'];
   if (notifScenarios.includes(STATE.scenarioKey)) {
     STATE._pendingContent = content;
     const cardMap = { 'A-anthropic':'notificationCard', 'A-third-party':'notificationCard3', 'B-anthropic':'notificationCardB', 'B-third-party':'notificationCardBT', 'C-anthropic':'notificationCardCA', 'C-third-party':'notificationCardCT' };
@@ -2572,34 +2572,6 @@ function setupTimeOnPageTracking() {
   });
 }
 
-
-function showMCPAnthEmailModal(){showDetailModal("mCPAnthEmailModal")}
-function hideMCPAnthEmailModal(){hideDetailModal("mCPAnthEmailModal")}
-function showMCPAnthCalendarListModal(){showDetailModal("mCPAnthCalendarListModal")}
-function hideMCPAnthCalendarListModal(){hideDetailModal("mCPAnthCalendarListModal")}
-function showMCPAnthDirPathModal(){showDetailModal("mCPAnthDirPathModal")}
-function hideMCPAnthDirPathModal(){hideDetailModal("mCPAnthDirPathModal")}
-function showMCPAnthDirSearchModal(){showDetailModal("mCPAnthDirSearchModal")}
-function hideMCPAnthDirSearchModal(){hideDetailModal("mCPAnthDirSearchModal")}
-function showMCPAnthSearchResultModal(){showDetailModal("mCPAnthSearchResultModal")}
-function hideMCPAnthSearchResultModal(){hideDetailModal("mCPAnthSearchResultModal")}
-function showMCPAnthFilePathModal(){showDetailModal("mCPAnthFilePathModal")}
-function hideMCPAnthFilePathModal(){hideDetailModal("mCPAnthFilePathModal")}
-function showMCPAnthFileMetadataModal(){showDetailModal("mCPAnthFileMetadataModal")}
-function hideMCPAnthFileMetadataModal(){hideDetailModal("mCPAnthFileMetadataModal")}
-function showMCPAnthFileContentModal(){showDetailModal("mCPAnthFileContentModal")}
-function hideMCPAnthFileContentModal(){hideDetailModal("mCPAnthFileContentModal")}
-function showMCPAnthFileSummaryModal(){showDetailModal("mCPAnthFileSummaryModal")}
-function hideMCPAnthFileSummaryModal(){hideDetailModal("mCPAnthFileSummaryModal")}
-window.showMCPAnthEmailModal=showMCPAnthEmailModal;window.hideMCPAnthEmailModal=hideMCPAnthEmailModal;
-window.showMCPAnthCalendarListModal=showMCPAnthCalendarListModal;window.hideMCPAnthCalendarListModal=hideMCPAnthCalendarListModal;
-window.showMCPAnthDirPathModal=showMCPAnthDirPathModal;window.hideMCPAnthDirPathModal=hideMCPAnthDirPathModal;
-window.showMCPAnthDirSearchModal=showMCPAnthDirSearchModal;window.hideMCPAnthDirSearchModal=hideMCPAnthDirSearchModal;
-window.showMCPAnthSearchResultModal=showMCPAnthSearchResultModal;window.hideMCPAnthSearchResultModal=hideMCPAnthSearchResultModal;
-window.showMCPAnthFilePathModal=showMCPAnthFilePathModal;window.hideMCPAnthFilePathModal=hideMCPAnthFilePathModal;
-window.showMCPAnthFileMetadataModal=showMCPAnthFileMetadataModal;window.hideMCPAnthFileMetadataModal=hideMCPAnthFileMetadataModal;
-window.showMCPAnthFileContentModal=showMCPAnthFileContentModal;window.hideMCPAnthFileContentModal=hideMCPAnthFileContentModal;
-window.showMCPAnthFileSummaryModal=showMCPAnthFileSummaryModal;window.hideMCPAnthFileSummaryModal=hideMCPAnthFileSummaryModal;
 // ── Toast ───────────────────────────────────────────
 function renderContentBlocks(c){if(c.blocks){renderBlocks(c.blocks)}else if(c.tools){const b=c.tools.map(t=>({type:"tool",...t}));if(c.finalResponse)b.push({type:"text",html:c.finalResponse});renderBlocks(b)}}
 function sdM(p){const o=document.getElementById(p+"Overlay"),m=document.getElementById(p);if(!o||!m)return;o.classList.add("visible");m.classList.add("visible")}
