@@ -203,6 +203,14 @@ body {
   color: var(--text-tertiary);
 }
 
+.likert-scale label small {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
 /* --- Section Divider --- */
 .section-divider {
   text-align: center;
