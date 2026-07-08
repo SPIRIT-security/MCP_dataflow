@@ -21,44 +21,58 @@
 
         <div class="ms-question">
           <div class="ms-q-num">Q1</div>
-          <div class="ms-q-text">What data do you think the Claude application can access in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-q-text" id="q1Text">What data do you think Claude can receive from the MCP server in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
           <div class="ms-options ms-options-grid" id="q1Options">
-            <!-- A: Calendar -->
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="cal-events-basic"> Events during the specified time window, including the event title, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="cal-events-detail"> Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="cal-free-slots"> Free time slots during the specified time window</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="cal-all-basic"> All events in the calendar, including the event title, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="cal-all-detail"> All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
-            <!-- B: Filesystem -->
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-dir-path"> The allowed access directory path</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-match-paths"> The file paths of files matching the search pattern (keywords)</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-related-paths"> The file paths of files that are related to or may fulfill the request</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-metadata"> File metadata, including creation time and last modified time</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-match-content"> The contents of files matching the search pattern (keywords)</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-dir-tree"> The directory tree</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-related-content"> The contents of files that are related to or may fulfill the request</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q1" value="fs-all-content"> The contents of all files in the allowed access directory</label>
-            <!-- Common -->
-            <label><input type="checkbox" name="q1" value="not-sure"> I am not sure</label>
+            <!-- Calendar: Prompt A & C -->
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="A"> A. Events during the specified time window, including the event title, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="B"> B. Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="C"> C. Available time slots during the specified time window</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="D"> D. All events in the calendar, including the event title, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="E"> E. All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <!-- Filesystem: Prompt B only -->
+            <label class="opt-B"><input type="checkbox" name="q1" value="A"> A. Content of all files in the medical folder</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="B"> B. File metadata, including creation time and last modified time</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="C"> C. Content of files created yesterday in the medical folder</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="D"> D. Content of all files in the entire file system</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="E"> E. Content of all files created yesterday in the entire file system</label>
+            <!-- Filesystem: Prompt C only (values F-J) -->
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="F"> F. Content of all files in the medical folder</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="G"> G. File metadata, including creation time and last modified time</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="H"> H. Content of files created yesterday in the medical folder</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="I"> I. Content of all files in the entire file system</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="J"> J. Content of all files created yesterday in the entire file system</label>
+            <!-- Not sure: Prompt A & B (both use F) -->
+            <label class="opt-A opt-B"><input type="checkbox" name="q1" value="F"> F. I am not sure</label>
+            <!-- Not sure: Prompt C only (uses K) -->
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="K"> K. I am not sure</label>
           </div>
         </div>
 
         <div class="ms-question">
           <div class="ms-q-num">Q2</div>
-          <div class="ms-q-text" id="q2Text">What data do you think the MCP server can access in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-q-text" id="q2Text">What data do you think the MCP server can receive from Claude in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
           <div class="ms-options ms-options-grid" id="q2Options">
-            <!-- A: Calendar -->
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="cal-email"> Personal calendar email address</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="cal-time-window"> The time window provided in the prompt</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="cal-attendee"> Attendee email addresses</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="cal-meeting-time"> The meeting time and duration for events to be created</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="cal-event-title"> Event title and detailed description for events to be created</label>
-            <!-- B: Filesystem -->
-            <label class="opt-B opt-C"><input type="checkbox" name="q2" value="fs-dir-path"> The allowed access directory path</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q2" value="fs-file-paths"> The file paths to be checked</label>
-            <label class="opt-B opt-C"><input type="checkbox" name="q2" value="fs-search-pattern"> The search pattern (keywords)</label>
-            <!-- Common -->
-            <label><input type="checkbox" name="q2" value="not-sure"> I am not sure</label>
+            <!-- Calendar: Prompt A & C -->
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="A"> A. The time window provided in the prompt</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="B"> B. Attendee email addresses</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="C"> C. The meeting time and duration for events to be created</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="D"> D. Event title and detailed description for events to be created</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="E"> E. The original user prompt</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="F"> F. The user's email history</label>
+            <!-- Filesystem: Prompt B only -->
+            <label class="opt-B"><input type="checkbox" name="q2" value="A"> A. The allowed directory path</label>
+            <label class="opt-B"><input type="checkbox" name="q2" value="B"> B. The file paths to be checked</label>
+            <label class="opt-B"><input type="checkbox" name="q2" value="C"> C. The search pattern (keywords)</label>
+            <!-- Filesystem: Prompt C only (values G-I) -->
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="G"> G. The allowed directory path</label>
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="H"> H. The file paths to be checked</label>
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="I"> I. The search pattern (keywords)</label>
+            <!-- Not sure: Prompt A only (value G) -->
+            <label class="opt-A"><input type="checkbox" name="q2" value="G"> G. I am not sure</label>
+            <!-- Not sure: Prompt B only (value D) -->
+            <label class="opt-B"><input type="checkbox" name="q2" value="D"> D. I am not sure</label>
+            <!-- Not sure: Prompt C only (value J) -->
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="J"> J. I am not sure</label>
           </div>
         </div>
 
