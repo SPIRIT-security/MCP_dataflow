@@ -1,6 +1,15 @@
 const SURVEY_KEY = 'mcp_mini_surveys';
 const MCP_NAMES = { A: 'Google Calendar MCP server', B: 'Filesystem MCP server', C: 'Google Calendar MCP server and Filesystem MCP server' };
-const Q1_TEXTS = { A: 'What data do you think the Claude application can access in this scenario?', B: 'What data do you think the Claude application can access in this scenario?', C: 'What data do you think the Claude application can access in this scenario?' };
+const Q1_TEXTS = {
+  A: 'What data do you think Claude can receive from the Google Calendar MCP server in this scenario?',
+  B: 'What data do you think Claude can receive from the Filesystem MCP server in this scenario?',
+  C: 'What data do you think Claude can receive from the Google Calendar MCP server and Filesystem MCP server in this scenario?'
+};
+const Q2_TEXTS = {
+  A: 'What data do you think the Google Calendar MCP server can receive from Claude in this scenario?',
+  B: 'What data do you think the Filesystem MCP server can receive from Claude in this scenario?',
+  C: 'What data do you think the Google Calendar MCP server and Filesystem MCP server can access in this scenario?'
+};
 
 function parseParams() {
   const params = new URLSearchParams(window.location.search);
@@ -14,13 +23,25 @@ function init() {
   if (!prompt) { window.location.href = 'homepage.html'; return; }
 
   // Show/hide options based on prompt
-  const showClass = 'opt-' + prompt;
-  document.querySelectorAll('.opt-A, .opt-B, .opt-C').forEach(el => {
-    el.classList.toggle('opt-hidden', !el.classList.contains(showClass));
+  // opt-A: Calendar items (show in A), opt-B: Filesystem items (show in B), opt-C: Calendar items (show in C)
+  // opt-C-only: Filesystem items with C-specific values (show only in C)
+  // Items with both opt-A and opt-C: show in both A and C
+  // Items with opt-A only: show only in A
+  // Items with opt-B only: show only in B
+  document.querySelectorAll('.opt-A, .opt-B, .opt-C, .opt-C-only').forEach(el => {
+    let visible = false;
+    if (el.classList.contains('opt-A') && prompt === 'A') visible = true;
+    if (el.classList.contains('opt-B') && prompt === 'B') visible = true;
+    if (el.classList.contains('opt-C') && prompt === 'C') visible = true;
+    if (el.classList.contains('opt-C-only') && prompt === 'C') visible = true;
+    el.classList.toggle('opt-hidden', !visible);
   });
 
+  // Update Q1 text
+  document.getElementById('q1Text').innerHTML = `${Q1_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
+
   // Update Q2 text
-  document.getElementById('q2Text').innerHTML = `What data do you think the <strong>${MCP_NAMES[prompt]}</strong> can access in this scenario? <span class="ms-hint">(Select all that apply)</span>`;
+  document.getElementById('q2Text').innerHTML = `${Q2_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
 
   // Handle submit
   document.getElementById('msForm').addEventListener('submit', (e) => {
