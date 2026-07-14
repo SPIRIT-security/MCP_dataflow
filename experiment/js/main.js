@@ -97,6 +97,7 @@ function initTracking() {
     data = {
       sessionId: `sess_${Date.now()}`,
       startedAt: new Date().toISOString(),
+      group: 'experiment',
       events: [],
       completedScenarios: [],
     };
