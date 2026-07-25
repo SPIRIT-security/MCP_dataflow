@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Survey</title>
+  <link rel="stylesheet" href="css/mini-survey.css">
+  <style>
+    .ms-options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 8px; }
+    .ms-options-grid label { font-size: 12px; }
+    .opt-hidden { display: none !important; }
+    @media (max-width: 500px) { .ms-options-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="ms-page">
+    <div class="ms-card">
+      <h1 class="ms-title">Feedback of the task</h1>
+      <p class="ms-subtitle" id="msSubtitle">Please answer a few questions about the task you just completed.</p>
+      <form id="msForm">
+
+        <div class="ms-question">
+          <div class="ms-q-num">Q1</div>
+          <div class="ms-q-text" id="q1Text">What data do you think Claude can receive from the MCP server in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q1Options">
+            <!-- Calendar: Prompt A & C -->
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="A"> A. Events during the specified time window, including the event title, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="B"> B. Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="C"> C. Available time slots during the specified time window</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="D"> D. All events in the calendar, including the event title, event ID, and event time</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="E"> E. All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <!-- Filesystem: Prompt B only -->
+            <label class="opt-B"><input type="checkbox" name="q1" value="A"> A. Content of all files in the medical folder</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="B"> B. File metadata, including creation time and last modified time</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="C"> C. Content of files created yesterday in the medical folder</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="D"> D. Content of all files in the entire file system</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="E"> E. Content of all files created yesterday in the entire file system</label>
+            <!-- Filesystem: Prompt C only (values F-J) -->
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="F"> F. Content of all files in the medical folder</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="G"> G. File metadata, including creation time and last modified time</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="H"> H. Content of files created yesterday in the medical folder</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="I"> I. Content of all files in the entire file system</label>
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="J"> J. Content of all files created yesterday in the entire file system</label>
+            <!-- Not sure: Prompt A & B (both use F) -->
+            <label class="opt-A opt-B"><input type="checkbox" name="q1" value="F"> F. I am not sure</label>
+            <!-- Not sure: Prompt C only (uses K) -->
+            <label class="opt-C-only"><input type="checkbox" name="q1" value="K"> K. I am not sure</label>
+          </div>
+        </div>
+
+        <div class="ms-question">
+          <div class="ms-q-num">Q2</div>
+          <div class="ms-q-text" id="q2Text">What data do you think the MCP server can receive from Claude in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q2Options">
+            <!-- Calendar: Prompt A & C -->
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="A"> A. The time window provided in the prompt</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="B"> B. Attendee email addresses</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="C"> C. The meeting time and duration for events to be created</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="D"> D. Event title and detailed description for events to be created</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="E"> E. The original user prompt</label>
+            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="F"> F. The user's email history</label>
+            <!-- Filesystem: Prompt B only -->
+            <label class="opt-B"><input type="checkbox" name="q2" value="A"> A. The allowed directory path</label>
+            <label class="opt-B"><input type="checkbox" name="q2" value="B"> B. The file paths to be checked</label>
+            <label class="opt-B"><input type="checkbox" name="q2" value="C"> C. The search pattern (keywords)</label>
+            <!-- Filesystem: Prompt C only (values G-I) -->
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="G"> G. The allowed directory path</label>
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="H"> H. The file paths to be checked</label>
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="I"> I. The search pattern (keywords)</label>
+            <!-- Not sure: Prompt A only (value G) -->
+            <label class="opt-A"><input type="checkbox" name="q2" value="G"> G. I am not sure</label>
+            <!-- Not sure: Prompt B only (value D) -->
+            <label class="opt-B"><input type="checkbox" name="q2" value="D"> D. I am not sure</label>
+            <!-- Not sure: Prompt C only (value J) -->
+            <label class="opt-C-only"><input type="checkbox" name="q2" value="J"> J. I am not sure</label>
+          </div>
+        </div>
+
+        <div class="ms-likert-section">
+          <p class="ms-likert-hint">(1 = Strongly, 5 = Not at all)</p>
+          <div class="ms-question"><div class="ms-q-num">Q3</div><div class="ms-q-text">How useful do you find the information provided during the chat?</div><div class="ms-likert"><label><input type="radio" name="q3" value="1"><span>1</span><small>Useless</small></label><label><input type="radio" name="q3" value="2"><span>2</span></label><label><input type="radio" name="q3" value="3"><span>3</span></label><label><input type="radio" name="q3" value="4"><span>4</span></label><label><input type="radio" name="q3" value="5"><span>5</span><small>Useful</small></label></div></div>
+          <div class="ms-question"><div class="ms-q-num">Q4</div><div class="ms-q-text">How much do you concern yourself with the privacy of the data flow during the chat?</div><div class="ms-likert"><label><input type="radio" name="q4" value="1"><span>1</span><small>Unworried</small></label><label><input type="radio" name="q4" value="2"><span>2</span></label><label><input type="radio" name="q4" value="3"><span>3</span></label><label><input type="radio" name="q4" value="4"><span>4</span></label><label><input type="radio" name="q4" value="5"><span>5</span><small>Worried</small></label></div></div>
+        </div>
+
+        <p class="ms-warning" id="msWarning" style="display:none;">⚠ Please answer all questions before continuing.</p>
+        <button type="submit" class="ms-submit-btn">Submit &amp; Return to Homepage</button>
+      </form>
+    </div>
+  </div>
+  <script src="js/mini-survey.js"></script>
+</body>
+</html>
