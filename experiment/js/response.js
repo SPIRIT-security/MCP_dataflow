@@ -76,15 +76,15 @@ It's a 1-hour meeting. Let me check the user's calendar for each of these window
   "attendeeEmails": [
     "primary"
   ],
-  "durationMinutes": 60,
-  "endTime": "2026-05-12T18:00:00",
-  "preferences": {
-    "endHour": "18:00",
-    "pageSize": 3,
-    "startHour": "13:00"
-  },
   "startTime": "2026-05-12T13:00:00",
-  "timeZone": "America/New_York"
+  "endTime": "2026-05-12T18:00:00",
+  "durationMinutes": 60,
+  "timeZone": "America/New_York",
+  "preferences": {
+    "startHour": "13:00",
+    "endHour": "18:00",
+    "pageSize": 3
+  }
 }`,
         response: `{
   "timeSlots": [
@@ -109,27 +109,22 @@ It's a 1-hour meeting. Let me check the user's calendar for each of these window
   "attendeeEmails": [
     "primary"
   ],
+  "startTime": "2026-05-13T11:00:00",
+  "endTime": "2026-05-13T18:00:00",
   "durationMinutes": 60,
-  "endTime": "2026-05-12T18:00:00",
+  "timeZone": "America/New_York",
   "preferences": {
+    "startHour": "11:00",
     "endHour": "18:00",
-    "pageSize": 3,
-    "startHour": "13:00"
-  },
-  "startTime": "2026-05-12T13:00:00",
-  "timeZone": "America/New_York"
+    "pageSize": 3
+  }
 }`,
         response: `{
   "timeSlots": [
     {
-      "startTime": "2026-05-12T17:00:00Z",
-      "endTime": "2026-05-12T20:00:00Z",
-      "durationMinutes": 180
-    },
-    {
-      "startTime": "2026-05-12T21:00:00Z",
-      "endTime": "2026-05-12T22:00:00Z",
-      "durationMinutes": 60
+      "startTime": "2026-05-13T15:00:00Z",
+      "endTime": "2026-05-13T17:00:00Z",
+      "durationMinutes": 120
     }
   ]
 }`,
