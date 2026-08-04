@@ -2595,20 +2595,6 @@ function showMCPAnthFileContentModal(){showDetailModal("mCPAnthFileContentModal"
 function hideMCPAnthFileContentModal(){hideDetailModal("mCPAnthFileContentModal")}
 function showMCPAnthFileSummaryModal(){showDetailModal("mCPAnthFileSummaryModal")}
 function hideMCPAnthFileSummaryModal(){hideDetailModal("mCPAnthFileSummaryModal")}
-function showMCPThirdEmailModal(){showDetailModal("mCPThirdEmailModal")}
-function hideMCPThirdEmailModal(){hideDetailModal("mCPThirdEmailModal")}
-function showMCPThirdCalendarListModal(){showDetailModal("mCPThirdCalendarListModal")}
-function hideMCPThirdCalendarListModal(){hideDetailModal("mCPThirdCalendarListModal")}
-function showMCPThirdDirPathModal(){showDetailModal("mCPThirdDirPathModal")}
-function hideMCPThirdDirPathModal(){hideDetailModal("mCPThirdDirPathModal")}
-function showMCPThirdDirTreeModal(){showDetailModal("mCPThirdDirTreeModal")}
-function hideMCPThirdDirTreeModal(){hideDetailModal("mCPThirdDirTreeModal")}
-function showMCPThirdFilePathModal(){showDetailModal("mCPThirdFilePathModal")}
-function hideMCPThirdFilePathModal(){hideDetailModal("mCPThirdFilePathModal")}
-function showMCPThirdFileContentModal(){showDetailModal("mCPThirdFileContentModal")}
-function hideMCPThirdFileContentModal(){hideDetailModal("mCPThirdFileContentModal")}
-function showMCPThirdFileSummaryModal(){showDetailModal("mCPThirdFileSummaryModal")}
-function hideMCPThirdFileSummaryModal(){hideDetailModal("mCPThirdFileSummaryModal")}
 window.showMCPAnthEmailModal=showMCPAnthEmailModal;window.hideMCPAnthEmailModal=hideMCPAnthEmailModal;
 window.showMCPAnthCalendarListModal=showMCPAnthCalendarListModal;window.hideMCPAnthCalendarListModal=hideMCPAnthCalendarListModal;
 window.showMCPAnthDirPathModal=showMCPAnthDirPathModal;window.hideMCPAnthDirPathModal=hideMCPAnthDirPathModal;
@@ -2619,13 +2605,6 @@ window.showMCPAnthFilePathModal2=showMCPAnthFilePathModal2;window.hideMCPAnthFil
 window.showMCPAnthFileMetadataModal=showMCPAnthFileMetadataModal;window.hideMCPAnthFileMetadataModal=hideMCPAnthFileMetadataModal;
 window.showMCPAnthFileContentModal=showMCPAnthFileContentModal;window.hideMCPAnthFileContentModal=hideMCPAnthFileContentModal;
 window.showMCPAnthFileSummaryModal=showMCPAnthFileSummaryModal;window.hideMCPAnthFileSummaryModal=hideMCPAnthFileSummaryModal;
-window.showMCPThirdEmailModal=showMCPThirdEmailModal;window.hideMCPThirdEmailModal=hideMCPThirdEmailModal;
-window.showMCPThirdCalendarListModal=showMCPThirdCalendarListModal;window.hideMCPThirdCalendarListModal=hideMCPThirdCalendarListModal;
-window.showMCPThirdDirPathModal=showMCPThirdDirPathModal;window.hideMCPThirdDirPathModal=hideMCPThirdDirPathModal;
-window.showMCPThirdDirTreeModal=showMCPThirdDirTreeModal;window.hideMCPThirdDirTreeModal=hideMCPThirdDirTreeModal;
-window.showMCPThirdFilePathModal=showMCPThirdFilePathModal;window.hideMCPThirdFilePathModal=hideMCPThirdFilePathModal;
-window.showMCPThirdFileContentModal=showMCPThirdFileContentModal;window.hideMCPThirdFileContentModal=hideMCPThirdFileContentModal;
-window.showMCPThirdFileSummaryModal=showMCPThirdFileSummaryModal;window.hideMCPThirdFileSummaryModal=hideMCPThirdFileSummaryModal;
 function showToast(message) {
   const existing = document.querySelector('.notification');
   if (existing) existing.remove();
