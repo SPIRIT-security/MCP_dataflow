@@ -9,6 +9,7 @@
     .ms-options-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px 8px; }
     .ms-options-grid label { font-size: 12px; }
     .opt-hidden { display: none !important; }
+    .c-split .ms-q-num { width: auto; min-width: 24px; padding: 0 7px; }
     @media (max-width: 500px) { .ms-options-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -19,60 +20,97 @@
       <p class="ms-subtitle" id="msSubtitle">Please answer a few questions about the task you just completed.</p>
       <form id="msForm">
 
-        <div class="ms-question">
+        <!-- Q1 for Prompt A & B: single question -->
+        <div class="ms-question" id="q1Question">
           <div class="ms-q-num">Q1</div>
           <div class="ms-q-text" id="q1Text">What data do you think Claude can receive from the MCP server in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
           <div class="ms-options ms-options-grid" id="q1Options">
-            <!-- Calendar: Prompt A & C -->
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="A"> A. Events during the specified time window, including the event title, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="B"> B. Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="C"> C. Available time slots during the specified time window</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="D"> D. All events in the calendar, including the event title, event ID, and event time</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q1" value="E"> E. All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <!-- Calendar: Prompt A only -->
+            <label class="opt-A"><input type="checkbox" name="q1" value="A"> A. Events during the specified time window, including the event title, event ID, and event time</label>
+            <label class="opt-A"><input type="checkbox" name="q1" value="B"> B. Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <label class="opt-A"><input type="checkbox" name="q1" value="C"> C. Available time slots during the specified time window</label>
+            <label class="opt-A"><input type="checkbox" name="q1" value="D"> D. All events in the calendar, including the event title, event ID, and event time</label>
+            <label class="opt-A"><input type="checkbox" name="q1" value="E"> E. All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
             <!-- Filesystem: Prompt B only -->
-            <label class="opt-B"><input type="checkbox" name="q1" value="A"> A. Content of all files in the medical folder</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="A"> A. Content of medical files filter by filename in the directory allowed by users</label>
             <label class="opt-B"><input type="checkbox" name="q1" value="B"> B. File metadata, including creation time and last modified time</label>
-            <label class="opt-B"><input type="checkbox" name="q1" value="C"> C. Content of files created yesterday in the medical folder</label>
-            <label class="opt-B"><input type="checkbox" name="q1" value="D"> D. Content of all files in the entire file system</label>
-            <label class="opt-B"><input type="checkbox" name="q1" value="E"> E. Content of all files created yesterday in the entire file system</label>
-            <!-- Filesystem: Prompt C only (values F-J) -->
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="F"> F. Content of all files in the medical folder</label>
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="G"> G. File metadata, including creation time and last modified time</label>
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="H"> H. Contents of all files matching the calendar times in the medical folder</label>
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="I"> I. Content of all files in the entire file system</label>
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="J"> J. Contents of all files matching the calendar times in the entire file system</label>
-            <!-- Not sure: Prompt A & B (both use F) -->
-            <label class="opt-A opt-B"><input type="checkbox" name="q1" value="F"> F. I am not sure</label>
-            <!-- Not sure: Prompt C only (uses K) -->
-            <label class="opt-C-only"><input type="checkbox" name="q1" value="K"> K. I am not sure</label>
+            <label class="opt-B"><input type="checkbox" name="q1" value="C"> C. Content of medical files created yesterday in the directory allowed by users</label>
+            <!-- Not sure: Prompt A only (value F) -->
+            <label class="opt-A"><input type="checkbox" name="q1" value="F"> F. I am not sure</label>
+            <!-- Not sure: Prompt B only (value D) -->
+            <label class="opt-B"><input type="checkbox" name="q1" value="D"> D. I am not sure</label>
           </div>
         </div>
 
-        <div class="ms-question">
+        <!-- Q1 for Prompt C only: two sub-questions (one per MCP server) -->
+        <div class="ms-question c-split" id="q1aQuestion">
+          <div class="ms-q-num">Q1a</div>
+          <div class="ms-q-text">What data do you think Claude can receive from the Google Calendar MCP server in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q1aOptions">
+            <label><input type="checkbox" name="q1a" value="A"> A. Events during the specified time window, including the event title, event ID, and event time</label>
+            <label><input type="checkbox" name="q1a" value="B"> B. Events during the specified time window, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <label><input type="checkbox" name="q1a" value="C"> C. Available time slots during the specified time window</label>
+            <label><input type="checkbox" name="q1a" value="D"> D. All events in the calendar, including the event title, event ID, and event time</label>
+            <label><input type="checkbox" name="q1a" value="E"> E. All events in the calendar, including the event title, detailed description, attendee list, event ID, and event time</label>
+            <label><input type="checkbox" name="q1a" value="F"> F. I am not sure</label>
+          </div>
+        </div>
+        <div class="ms-question c-split" id="q1bQuestion">
+          <div class="ms-q-num">Q1b</div>
+          <div class="ms-q-text">What data do you think Claude can receive from the Filesystem MCP server in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q1bOptions">
+            <label><input type="checkbox" name="q1b" value="A"> A. Content of medical files filter by filename in the directory allowed by users</label>
+            <label><input type="checkbox" name="q1b" value="B"> B. File metadata, including creation time and last modified time</label>
+            <label><input type="checkbox" name="q1b" value="C"> C. Contents of files after health checkup in the directory allowed by users</label>
+            <label><input type="checkbox" name="q1b" value="D"> D. I am not sure</label>
+          </div>
+        </div>
+
+        <!-- Q2 for Prompt A & B: single question -->
+        <div class="ms-question" id="q2Question">
           <div class="ms-q-num">Q2</div>
           <div class="ms-q-text" id="q2Text">What data do you think the MCP server can receive from Claude in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
           <div class="ms-options ms-options-grid" id="q2Options">
-            <!-- Calendar: Prompt A & C -->
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="A"> A. The time window provided in the prompt</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="B"> B. Attendee email addresses</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="C"> C. The meeting time and duration for events to be created</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="D"> D. Event title and detailed description for events to be created</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="E"> E. The original user prompt</label>
-            <label class="opt-A opt-C"><input type="checkbox" name="q2" value="F"> F. The user's email history</label>
+            <!-- Calendar: Prompt A only -->
+            <label class="opt-A"><input type="checkbox" name="q2" value="A"> A. The time window provided in the prompt</label>
+            <label class="opt-A"><input type="checkbox" name="q2" value="B"> B. Attendee email addresses</label>
+            <label class="opt-A"><input type="checkbox" name="q2" value="C"> C. The meeting time and duration for events to be created</label>
+            <label class="opt-A"><input type="checkbox" name="q2" value="D"> D. Event title and detailed description for events to be created</label>
+            <label class="opt-A"><input type="checkbox" name="q2" value="E"> E. The original user prompt</label>
+            <label class="opt-A"><input type="checkbox" name="q2" value="F"> F. The user's email history</label>
             <!-- Filesystem: Prompt B only -->
             <label class="opt-B"><input type="checkbox" name="q2" value="A"> A. The allowed directory path</label>
             <label class="opt-B"><input type="checkbox" name="q2" value="B"> B. The file paths to be checked</label>
             <label class="opt-B"><input type="checkbox" name="q2" value="C"> C. The search pattern (keywords) such as "medical"</label>
-            <!-- Filesystem: Prompt C only (values G-I) -->
-            <label class="opt-C-only"><input type="checkbox" name="q2" value="G"> G. The allowed directory path</label>
-            <label class="opt-C-only"><input type="checkbox" name="q2" value="H"> H. The file paths to be checked</label>
-            <label class="opt-C-only"><input type="checkbox" name="q2" value="I"> I. The search pattern (keywords) such as "medical"</label>
             <!-- Not sure: Prompt A only (value G) -->
             <label class="opt-A"><input type="checkbox" name="q2" value="G"> G. I am not sure</label>
             <!-- Not sure: Prompt B only (value D) -->
             <label class="opt-B"><input type="checkbox" name="q2" value="D"> D. I am not sure</label>
-            <!-- Not sure: Prompt C only (value J) -->
-            <label class="opt-C-only"><input type="checkbox" name="q2" value="J"> J. I am not sure</label>
+          </div>
+        </div>
+
+        <!-- Q2 for Prompt C only: two sub-questions (one per MCP server) -->
+        <div class="ms-question c-split" id="q2aQuestion">
+          <div class="ms-q-num">Q2a</div>
+          <div class="ms-q-text">What data do you think the Google Calendar MCP server can receive from Claude in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q2aOptions">
+            <label><input type="checkbox" name="q2a" value="A"> A. The time window provided in the prompt</label>
+            <label><input type="checkbox" name="q2a" value="B"> B. Attendee email addresses</label>
+            <label><input type="checkbox" name="q2a" value="C"> C. The meeting time and duration for events to be created</label>
+            <label><input type="checkbox" name="q2a" value="D"> D. Event title and detailed description for events to be created</label>
+            <label><input type="checkbox" name="q2a" value="E"> E. The original user prompt</label>
+            <label><input type="checkbox" name="q2a" value="F"> F. The user's email history</label>
+            <label><input type="checkbox" name="q2a" value="G"> G. I am not sure</label>
+          </div>
+        </div>
+        <div class="ms-question c-split" id="q2bQuestion">
+          <div class="ms-q-num">Q2b</div>
+          <div class="ms-q-text">What data do you think the Filesystem MCP server can receive from Claude in this scenario? <span class="ms-hint">(Select all that apply)</span></div>
+          <div class="ms-options ms-options-grid" id="q2bOptions">
+            <label><input type="checkbox" name="q2b" value="A"> A. The allowed directory path</label>
+            <label><input type="checkbox" name="q2b" value="B"> B. The file paths to be checked</label>
+            <label><input type="checkbox" name="q2b" value="C"> C. The search pattern (keywords) such as "medical"</label>
+            <label><input type="checkbox" name="q2b" value="D"> D. I am not sure</label>
           </div>
         </div>
 
