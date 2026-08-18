@@ -2,13 +2,11 @@ const SURVEY_KEY = 'mcp_mini_surveys';
 const MCP_NAMES = { A: 'Google Calendar MCP server', B: 'Filesystem MCP server', C: 'Google Calendar MCP server and Filesystem MCP server' };
 const Q1_TEXTS = {
   A: 'What data do you think Claude can receive from the Google Calendar MCP server in this scenario?',
-  B: 'What data do you think Claude can receive from the Filesystem MCP server in this scenario?',
-  C: 'What data do you think Claude can receive from the Google Calendar MCP server and Filesystem MCP server in this scenario?'
+  B: 'What data do you think Claude can receive from the Filesystem MCP server in this scenario?'
 };
 const Q2_TEXTS = {
   A: 'What data do you think the Google Calendar MCP server can receive from Claude in this scenario?',
-  B: 'What data do you think the Filesystem MCP server can receive from Claude in this scenario?',
-  C: 'What data do you think the Google Calendar MCP server and Filesystem MCP server can access in this scenario?'
+  B: 'What data do you think the Filesystem MCP server can receive from Claude in this scenario?'
 };
 
 function parseParams() {
@@ -18,41 +16,57 @@ function parseParams() {
 function getSurveyData() { try { const raw = localStorage.getItem(SURVEY_KEY); return raw ? JSON.parse(raw) : []; } catch { return []; } }
 function saveSurveyData(data) { localStorage.setItem(SURVEY_KEY, JSON.stringify(data)); }
 
+function checkedValues(name) {
+  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+}
+function showWarning() { document.getElementById('msWarning').style.display = 'block'; }
+
 function init() {
   const { prompt, mcp, scenario } = parseParams();
   if (!prompt) { window.location.href = 'homepage.html'; return; }
 
-  // Show/hide options based on prompt
-  // opt-A: Calendar items (show in A), opt-B: Filesystem items (show in B), opt-C: Calendar items (show in C)
-  // opt-C-only: Filesystem items with C-specific values (show only in C)
-  // Items with both opt-A and opt-C: show in both A and C
-  // Items with opt-A only: show only in A
-  // Items with opt-B only: show only in B
-  document.querySelectorAll('.opt-A, .opt-B, .opt-C, .opt-C-only').forEach(el => {
+  // Q1/Q2 (single question per direction) are used for prompts A & B:
+  // opt-A: Calendar options (show in A), opt-B: Filesystem options (show in B)
+  document.querySelectorAll('#q1Question .opt-A, #q1Question .opt-B, #q2Question .opt-A, #q2Question .opt-B').forEach(el => {
     let visible = false;
     if (el.classList.contains('opt-A') && prompt === 'A') visible = true;
     if (el.classList.contains('opt-B') && prompt === 'B') visible = true;
-    if (el.classList.contains('opt-C') && prompt === 'C') visible = true;
-    if (el.classList.contains('opt-C-only') && prompt === 'C') visible = true;
     el.classList.toggle('opt-hidden', !visible);
   });
 
-  // Update Q1 text
-  document.getElementById('q1Text').innerHTML = `${Q1_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
+  // Prompt C: hide the single Q1/Q2 and show the split sub-questions instead
+  document.getElementById('q1Question').classList.toggle('opt-hidden', prompt === 'C');
+  document.getElementById('q2Question').classList.toggle('opt-hidden', prompt === 'C');
+  document.querySelectorAll('.c-split').forEach(el => el.classList.toggle('opt-hidden', prompt !== 'C'));
 
-  // Update Q2 text
-  document.getElementById('q2Text').innerHTML = `${Q2_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
+  if (prompt !== 'C') {
+    document.getElementById('q1Text').innerHTML = `${Q1_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
+    document.getElementById('q2Text').innerHTML = `${Q2_TEXTS[prompt]} <span class="ms-hint">(Select all that apply)</span>`;
+  }
 
   // Handle submit
   document.getElementById('msForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    const q1 = Array.from(document.querySelectorAll('input[name="q1"]:checked')).map(el => el.value);
-    const q2 = Array.from(document.querySelectorAll('input[name="q2"]:checked')).map(el => el.value);
     const q3 = document.querySelector('input[name="q3"]:checked')?.value;
     const q4 = document.querySelector('input[name="q4"]:checked')?.value;
-    if (q1.length === 0 || q2.length === 0 || !q3 || !q4) { document.getElementById('msWarning').style.display = 'block'; return; }
+    const base = { scenario, prompt, mcp, q3: parseInt(q3), q4: parseInt(q4), timestamp: new Date().toISOString() };
+
+    let entry;
+    if (prompt === 'C') {
+      const q1a = checkedValues('q1a');
+      const q1b = checkedValues('q1b');
+      const q2a = checkedValues('q2a');
+      const q2b = checkedValues('q2b');
+      if (!q1a.length || !q1b.length || !q2a.length || !q2b.length || !q3 || !q4) { showWarning(); return; }
+      entry = { ...base, q1a, q1b, q2a, q2b };
+    } else {
+      const q1 = checkedValues('q1');
+      const q2 = checkedValues('q2');
+      if (!q1.length || !q2.length || !q3 || !q4) { showWarning(); return; }
+      entry = { ...base, q1, q2 };
+    }
     const surveys = getSurveyData();
-    surveys.push({ scenario, prompt, mcp, q1, q2, q3: parseInt(q3), q4: parseInt(q4), timestamp: new Date().toISOString() });
+    surveys.push(entry);
     saveSurveyData(surveys);
     window.location.href = 'homepage.html';
   });
