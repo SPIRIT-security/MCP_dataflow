@@ -179,7 +179,7 @@
                 <p class="notification-card-text" style="font-weight:700;font-size:15px;color:#141414;">This diagram previews how your data flows between MCP servers and Claude, and users can click the blue underlined text inside the diagram to view more details.</p>
                 <div class="notification-card-svg" style="position:relative;">
                   <img src="Image/Filesystem-anthropic.svg" style="width:100%;height:auto;" />
-                  <a class="svg-overlay-link" style="position:absolute;top:16%;left:57.5%;width:11%;height:3%;cursor:pointer;" onclick="showFilesystemDirPathModal()" title="Directories path"></a>
+                  <a class="svg-overlay-link" style="position:absolute;top:14%;left:57.5%;width:11%;height:5%;cursor:pointer;" onclick="showFilesystemDirPathModal()" title="Directories path"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:21%;left:57.5%;width:11%;height:7%;cursor:pointer;" onclick="showFilesystemDirSearchModal()" title="Directory path and search pattern"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:31%;left:57.5%;width:11%;height:4%;cursor:pointer;" onclick="showFilesystemSearchResultModal()" title="Search result"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:40%;left:57.5%;width:11%;height:4%;cursor:pointer;" onclick="showFilesystemFilePathModal()" title="File path"></a>
@@ -207,7 +207,7 @@
                   <img src="Image/2MCP-anthropic.svg" style="width:100%;height:auto;" />
                   <a class="svg-overlay-link" style="position:absolute;top:7%;left:57.5%;width:14%;height:3%;cursor:pointer;" onclick="showMCPAnthEmailModal()" title="Email and time window"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:11.5%;left:57.5%;width:14%;height:6%;cursor:pointer;" onclick="showMCPAnthCalendarListModal()" title="Calendar event list"></a>
-                  <a class="svg-overlay-link" style="position:absolute;top:29%;left:57.5%;width:14%;height:2%;cursor:pointer;" onclick="showMCPAnthDirPathModal()" title="Directory path"></a>
+                  <a class="svg-overlay-link" style="position:absolute;top:27%;left:57.5%;width:14%;height:5%;cursor:pointer;" onclick="showMCPAnthDirPathModal()" title="Directory path"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:34%;left:57.5%;width:14%;height:4%;cursor:pointer;" onclick="showMCPAnthDirSearchModal()" title="Directory path and search pattern"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:42%;left:57.5%;width:14%;height:3%;cursor:pointer;" onclick="showMCPAnthSearchResultModal()" title="Search result"></a>
                   <a class="svg-overlay-link" style="position:absolute;top:50%;left:57.5%;width:14%;height:4%;cursor:pointer;" onclick="showMCPAnthFilePathModal()" title="File path"></a>
@@ -365,7 +365,7 @@
       <div class="email-detail-modal-overlay" id="filesystemDirPathModalOverlay" onclick="hideFilesystemDirPathModal()"></div>
       <div class="email-detail-modal" id="filesystemDirPathModal">
         <button class="dataflow-modal-close" onclick="hideFilesystemDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
+        <div class="email-detail-body"><h3>Example of Directory path allowed by users</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
       </div>
       <div class="email-detail-modal-overlay" id="filesystemDirSearchModalOverlay" onclick="hideFilesystemDirSearchModal()"></div>
       <div class="email-detail-modal" id="filesystemDirSearchModal">
@@ -405,7 +405,7 @@
       <div class="email-detail-modal-overlay" id="filesystemThirdDirPathModalOverlay" onclick="hideFilesystemThirdDirPathModal()"></div>
       <div class="email-detail-modal" id="filesystemThirdDirPathModal">
         <button class="dataflow-modal-close" onclick="hideFilesystemThirdDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
+        <div class="email-detail-body"><h3>Example of Directory path allowed by users</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
       </div>
       <div class="email-detail-modal-overlay" id="filesystemThirdDirTreeModalOverlay" onclick="hideFilesystemThirdDirTreeModal()"></div>
       <div class="email-detail-modal" id="filesystemThirdDirTreeModal">
@@ -440,7 +440,7 @@
       <div class="email-detail-modal-overlay" id="mCPThirdDirPathModalOverlay" onclick="hideMCPThirdDirPathModal()"></div>
       <div class="email-detail-modal" id="mCPThirdDirPathModal">
         <button class="dataflow-modal-close" onclick="hideMCPThirdDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
+        <div class="email-detail-body"><h3>Example of Directory path allowed by users</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example<br>Directory includes nested structure</p></div>
       </div>
       <div class="email-detail-modal-overlay" id="mCPThirdDirTreeModalOverlay" onclick="hideMCPThirdDirTreeModal()"></div>
       <div class="email-detail-modal" id="mCPThirdDirTreeModal">
@@ -477,7 +477,7 @@
       <div class="email-detail-modal-overlay" id="mCPAnthDirPathModalOverlay" onclick="hideMCPAnthDirPathModal()"></div>
       <div class="email-detail-modal" id="mCPAnthDirPathModal">
         <button class="dataflow-modal-close" onclick="hideMCPAnthDirPathModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-        <div class="email-detail-body"><h3>Example of Directory path</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
+        <div class="email-detail-body"><h3>Example of Directory path allowed by users</h3><p style="font-family:monospace;font-size:14px;">/Users/Documents/Example</p></div>
       </div>
       <div class="email-detail-modal-overlay" id="mCPAnthDirSearchModalOverlay" onclick="hideMCPAnthDirSearchModal()"></div>
       <div class="email-detail-modal" id="mCPAnthDirSearchModal">
