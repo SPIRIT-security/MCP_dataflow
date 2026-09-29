@@ -1,5 +1,5 @@
 /* ============================================
-   Claude Web Interface — Styles
+   Claude Web Interface - Styles
    ============================================ */
 
 /* --- CSS Variables --- */
@@ -67,6 +67,7 @@
 html, body {
   height: 100%;
   overflow: hidden;
+  overflow: clip;
 }
 
 body {
